@@ -1,276 +1,281 @@
 export const EXAM_QUESTIONS = [
+    // Stage 1: Awareness
     {
         id: 1,
-        question: "Which of the following BEST defines trauma?",
+        question: "The first step in learning about your physical environment is:",
         options: {
-            A: "Disease affecting cell function",
-            B: "Injury from external force",
-            C: "Response to infection",
-            D: "Genetic cell mutation"
+            A: "Buying new furniture for the room",
+            B: "Noticing what is around you",
+            C: "Teaching others about nature",
+            D: "Writing a detailed report"
         },
         correct: "B"
     },
     {
         id: 2,
-        question: "A patient with chest bruising but no skin penetration after an accident has which injury type?",
+        question: "Being \"aware\" of your environment means you are:",
         options: {
-            A: "Penetrating trauma",
-            B: "Blast trauma",
-            C: "Thermal trauma",
-            D: "Blunt trauma"
+            A: "Ignoring the outside noise",
+            B: "Using all senses to observe",
+            C: "Sleeping in a dark room",
+            D: "Looking only at the sky"
         },
-        correct: "D"
+        correct: "B"
     },
     {
         id: 3,
-        question: "A crushing injury from a construction fall involves which energy form?",
+        question: "When you walk into a room, awareness helps you notice:",
         options: {
-            A: "Thermal energy",
-            B: "Chemical energy",
-            C: "Mechanical energy",
-            D: "Electrical energy"
+            A: "The exact price of the carpet",
+            B: "The lighting and temperature",
+            C: "The brand name of the paint",
+            D: "The year of construction"
         },
-        correct: "C"
+        correct: "B"
     },
     {
         id: 4,
-        question: "A cell that can fully recover if stress is removed is in which state?",
+        question: "Noticing that the room is too dark is an example of:",
         options: {
-            A: "Necrosis phase",
-            B: "Apoptosis phase",
-            C: "Reversible injury",
-            D: "Irreversible injury"
+            A: "A proper solution",
+            B: "A daily habit",
+            C: "An observation",
+            D: "An extra expense"
         },
         correct: "C"
     },
     {
         id: 5,
-        question: "The \"point of no return\" in cell injury refers to:",
+        question: "To become aware of the air quality, you should:",
         options: {
-            A: "Start of ATP production",
-            B: "Irreversible cell damage",
-            C: "Beginning of inflammation",
-            D: "Completion of DNA repair"
+            A: "Hold your breath for long",
+            B: "Ignore it completely",
+            C: "Feel if it is fresh or stale",
+            D: "Ask a friend to guess it"
+        },
+        correct: "C"
+    },
+    // Stage 2: Understanding
+    {
+        id: 6,
+        question: "Understanding the environment means knowing:",
+        options: {
+            A: "How to fix everything quickly",
+            B: "How things affect each other",
+            C: "The exact cost of electricity",
+            D: "The names of all the trees"
         },
         correct: "B"
     },
     {
-        id: 6,
-        question: "The most frequent cause of cell injury is:",
-        options: {
-            A: "Free radical damage",
-            B: "Chemical exposure",
-            C: "Physical trauma",
-            D: "Oxygen deficiency"
-        },
-        correct: "D"
-    },
-    {
         id: 7,
-        question: "During hypoxic injury, which event happens FIRST?",
+        question: "If the sun heats a room through the window, you understand:",
         options: {
-            A: "Mitochondria swell",
-            B: "ATP gets depleted",
-            C: "Calcium enters cell",
-            D: "Membrane ruptures"
+            A: "The sun is very hot",
+            B: "Glass traps the heat inside",
+            C: "The window is broken",
+            D: "The sun is far away"
         },
         correct: "B"
     },
     {
         id: 8,
-        question: "Free radicals damage cells mainly by:",
+        question: "Understanding noise pollution helps you realize that loud sounds:",
         options: {
-            A: "Activating DNA repair",
-            B: "Promoting water uptake",
-            C: "Attacking membranes and DNA",
-            D: "Boosting ATP synthesis"
+            A: "Can improve your mood",
+            B: "Can help you sleep well",
+            C: "Can cause stress over time",
+            D: "Can clean the room air"
         },
         correct: "C"
     },
     {
         id: 9,
-        question: "Which is an example of chemical-induced cell injury?",
+        question: "Knowing that plants release oxygen shows you understand:",
         options: {
-            A: "Cardiac ischemia",
-            B: "Liver toxin damage",
-            C: "Frostbite injury",
-            D: "Blunt force injury"
+            A: "The price of each plant",
+            B: "How plants clean the air",
+            C: "The correct way to water",
+            D: "The different leaf colors"
         },
         correct: "B"
     },
     {
         id: 10,
-        question: "Acetaminophen overdose causes injury through which mechanism?",
+        question: "Understanding your environment helps you predict:",
         options: {
-            A: "Hypoxic damage",
-            B: "Free radical injury",
-            C: "Chemical toxicity",
-            D: "Nutritional deficit"
+            A: "The future of the planet",
+            B: "How your actions affect space",
+            C: "The weather for next year",
+            D: "What your neighbor thinks"
         },
-        correct: "C"
+        correct: "B"
     },
+    // Stage 3: Connection
     {
         id: 11,
-        question: "Which statement BEST describes necrosis?",
+        question: "A cluttered and messy room is likely to make you feel:",
         options: {
-            A: "Energy-dependent cell death",
-            B: "Accidental premature cell death",
-            C: "Normal cellular turnover",
-            D: "Genetically programmed death"
+            A: "Very energetic and calm",
+            B: "Quite stressed or anxious",
+            C: "Extremely hungry always",
+            D: "Very sleepy and tired"
         },
         correct: "B"
     },
     {
         id: 12,
-        question: "The process of necrosis starts with:",
+        question: "Natural light is connected to well-being because it helps:",
         options: {
-            A: "DNA fragmentation",
-            B: "Inflammatory response",
-            C: "ATP depletion",
-            D: "Nuclear dissolution"
-        },
-        correct: "C"
-    },
-    {
-        id: 13,
-        question: "Calcium influx during necrosis results in:",
-        options: {
-            A: "Enzyme activation",
-            B: "ATP increase",
-            C: "Membrane repair",
-            D: "Cell shrinkage"
+            A: "Produce Vitamin D and regulate sleep",
+            B: "Produce electricity for the room",
+            C: "Make your body grow taller",
+            D: "Digest your food faster"
         },
         correct: "A"
     },
     {
-        id: 14,
-        question: "Karyolysis is defined as:",
+        id: 13,
+        question: "Looking at trees and nature is connected to well-being because it:",
         options: {
-            A: "Nuclear fragmentation",
-            B: "DNA dissolution",
-            C: "Cellular swelling",
-            D: "Membrane rupture"
+            A: "Increases your internet speed",
+            B: "Helps in lowering your stress",
+            C: "Makes you physically taller",
+            D: "Repairs broken furniture"
+        },
+        correct: "B"
+    },
+    {
+        id: 14,
+        question: "If the room temperature is too high, it can affect your:",
+        options: {
+            A: "Natural hair color",
+            B: "Focus and sleep quality",
+            C: "Eyesight and vision",
+            D: "Sense of taste"
         },
         correct: "B"
     },
     {
         id: 15,
-        question: "Caseous necrosis in tuberculosis shows:",
+        question: "A quiet environment is connected to well-being because it allows:",
         options: {
-            A: "Enzymatic digestion",
-            B: "Cheese-like appearance",
-            C: "Fat saponification",
-            D: "Ischemic changes"
+            A: "Better focus and relaxation",
+            B: "More distractions and noise",
+            C: "Louder conversations easily",
+            D: "Faster eating of food"
         },
-        correct: "B"
+        correct: "A"
     },
+    // Stage 4: Action
     {
         id: 16,
-        question: "Fat necrosis is commonly associated with:",
+        question: "If the air in the room feels stuffy, the best action is to:",
         options: {
-            A: "Heart attack",
-            B: "Pancreatitis",
-            C: "Stroke",
-            D: "Tuberculosis"
+            A: "Close all the doors tightly",
+            B: "Open a window or use a fan",
+            C: "Increase the room heating",
+            D: "Spray strong room freshener"
         },
         correct: "B"
     },
     {
         id: 17,
-        question: "\"Ghost cell\" appearance is seen in:",
+        question: "To improve well-being through light, you should:",
         options: {
-            A: "Liquefactive necrosis",
-            B: "Caseous necrosis",
-            C: "Coagulative necrosis",
-            D: "Fat necrosis"
+            A: "Cover all the windows fully",
+            B: "Use very bright blue-toned bulbs",
+            C: "Use blackout curtains during day",
+            D: "Open curtains for natural light"
         },
-        correct: "C"
+        correct: "D"
     },
     {
         id: 18,
-        question: "Liquefactive necrosis typically occurs in:",
+        question: "To reduce clutter and improve well-being, you should:",
         options: {
-            A: "Heart muscle",
-            B: "Lung tissue",
-            C: "Brain tissue",
-            D: "Pancreas"
+            A: "Buy more storage boxes",
+            B: "Hide everything under the bed",
+            C: "Organize and remove unused items",
+            D: "Simply ignore the entire mess"
         },
         correct: "C"
     },
     {
         id: 19,
-        question: "Which statement about apoptosis is TRUE?",
+        question: "To increase comfort in your room, you should take action to:",
         options: {
-            A: "It is uncontrolled death",
-            B: "It causes inflammation",
-            C: "It requires energy",
-            D: "It causes cell bursting"
+            A: "Keep a comfortable temperature",
+            B: "Wear a heavy coat indoors",
+            C: "Leave windows open in winter",
+            D: "Turn off the heating system"
         },
-        correct: "C"
+        correct: "A"
     },
     {
         id: 20,
-        question: "Apoptosis differs from necrosis because it:",
+        question: "To improve the sounds in your environment, you should:",
         options: {
-            A: "Triggers inflammation",
-            B: "Causes cell lysis",
-            C: "Needs no energy",
-            D: "Avoids inflammation"
+            A: "Turn up the television volume",
+            B: "Add soft rugs and cushions",
+            C: "Move to a very loud street",
+            D: "Speak in a very loud voice"
         },
-        correct: "D"
+        correct: "B"
     },
+    // Stage 5: Sustainment
     {
         id: 21,
-        question: "The enzymes that execute apoptosis are called:",
+        question: "\"Sustaining\" your environment means:",
         options: {
-            A: "Lipases",
-            B: "Proteases",
-            C: "Caspases",
-            D: "Kinases"
+            A: "Changing it once and forgetting",
+            B: "Maintaining good habits over time",
+            C: "Buying new items every week",
+            D: "Waiting till it becomes bad"
         },
-        correct: "C"
+        correct: "B"
     },
     {
         id: 22,
-        question: "Killer T-cells trigger apoptosis via:",
+        question: "To sustain a clean environment, you should:",
         options: {
-            A: "Intrinsic pathway",
-            B: "Death receptor pathway",
-            C: "Necrotic pathway",
-            D: "Mitochondrial pathway"
+            A: "Clean it only once in a year",
+            B: "Follow a small daily routine",
+            C: "Hire someone permanently",
+            D: "Wait until it gets very dirty"
         },
         correct: "B"
     },
     {
         id: 23,
-        question: "Cytochrome C is released from mitochondria in:",
+        question: "Sustaining good well-being requires you to regularly:",
         options: {
-            A: "Necrosis",
-            B: "Extrinsic apoptosis",
-            C: "Intrinsic apoptosis",
-            D: "Inflammation"
+            A: "Buy expensive gadgets and items",
+            B: "Check and adjust your space",
+            C: "Move to a new house often",
+            D: "Ignore the weather changes"
         },
-        correct: "C"
+        correct: "B"
     },
     {
         id: 24,
-        question: "A heart attack patient with elevated enzymes shows:",
+        question: "A long-term sustainable habit for well-being is:",
         options: {
-            A: "Apoptosis",
-            B: "Coagulative necrosis",
-            C: "Liquefactive necrosis",
-            D: "Fat necrosis"
+            A: "Drinking coffee to stay awake",
+            B: "Opening curtains each morning",
+            C: "Never opening the windows",
+            D: "Keeping lights on 24/7"
         },
         correct: "B"
     },
     {
         id: 25,
-        question: "Normal skin cell shedding occurs through:",
+        question: "The final goal of learning these stages is to:",
         options: {
-            A: "Necrosis",
-            B: "Apoptosis",
-            C: "Coagulative necrosis",
-            D: "Liquefactive necrosis"
+            A: "Memorize facts about the Earth",
+            B: "Create a healthy living space automatically",
+            C: "Become a professional architect",
+            D: "Win a quiz competition"
         },
         correct: "B"
     }
