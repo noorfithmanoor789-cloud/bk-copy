@@ -1,23 +1,13 @@
 import { db } from './firebase.js';
 import { collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
-import { questions } from './data.js';
-
-// ==================== STUDENT LOGIN DATA ====================
-const students = [];
-for (let i = 1; i <= 53; i++) {
-    students.push({
-        username: `student${i}`,
-        password: `pass${i}`,
-        name: `Student ${i}`
-    });
-}
+import { EXAM_STUDENTS, EXAM_QUESTIONS } from './data.js';
 
 // ==================== STATE MANAGEMENT ====================
 let currentUser = null;
 let currentQuestionIndex = 0;
-let userAnswers = new Array(84).fill(null);
+let userAnswers = new Array(EXAM_QUESTIONS.length).fill(null);
 let timer = null;
-let timeLeft = 1800; // 30 minutes in seconds
+let timeLeft = 1800; // 30 minutes
 let examStartTime = null;
 let examEndTime = null;
 let examSubmitted = false;
@@ -36,7 +26,7 @@ if (loginForm) {
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        const student = students.find(s => s.username === username && s.password === password);
+        const student = EXAM_STUDENTS.find(s => s.username === username && s.password === password);
 
         if (student) {
             currentUser = student;
@@ -44,6 +34,11 @@ if (loginForm) {
             loginSection.style.display = 'none';
             instructionsSection.style.display = 'block';
             loginError.style.display = 'none';
+            
+            const welcomeMsg = document.getElementById('welcomeMessage');
+            if (welcomeMsg) {
+                welcomeMsg.textContent = `Welcome, ${student.name}!`;
+            }
         } else {
             loginError.textContent = 'Invalid username or password. Please try again.';
             loginError.style.display = 'block';
@@ -61,7 +56,6 @@ if (startExamBtn) {
 
 // ==================== EXAM LOGIC (test.html) ====================
 if (window.location.pathname.includes('test.html')) {
-    // Check if user is logged in
     const userData = JSON.parse(localStorage.getItem('examUser'));
     if (!userData) {
         window.location.href = '../index.html';
@@ -69,12 +63,11 @@ if (window.location.pathname.includes('test.html')) {
 
     currentUser = userData;
     document.getElementById('studentNameDisplay').textContent = currentUser.name;
+    document.getElementById('totalQNum').textContent = EXAM_QUESTIONS.length;
 
-    // Display first question
     displayQuestion(0);
     startTimer();
 
-    // Event listeners for navigation
     document.getElementById('prevBtn')?.addEventListener('click', () => navigateQuestion(-1));
     document.getElementById('nextBtn')?.addEventListener('click', () => navigateQuestion(1));
     document.getElementById('submitBtn')?.addEventListener('click', submitExam);
@@ -82,24 +75,25 @@ if (window.location.pathname.includes('test.html')) {
 
 // ==================== QUESTION DISPLAY ====================
 function displayQuestion(index) {
-    if (index < 0 || index >= questions.length) return;
+    if (index < 0 || index >= EXAM_QUESTIONS.length) return;
 
-    const question = questions[index];
+    const question = EXAM_QUESTIONS[index];
     document.getElementById('currentQNum').textContent = index + 1;
     document.getElementById('questionText').textContent = question.question;
-    document.getElementById('progressFill').style.width = `${((index + 1) / questions.length) * 100}%`;
+    document.getElementById('progressFill').style.width = `${((index + 1) / EXAM_QUESTIONS.length) * 100}%`;
 
     const optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = '';
 
-    question.options.forEach((option, optIndex) => {
+    const optionKeys = ['A', 'B', 'C', 'D'];
+    optionKeys.forEach((key) => {
         const div = document.createElement('div');
         div.className = 'option-item';
-        if (userAnswers[index] === optIndex) {
+        if (userAnswers[index] === key) {
             div.classList.add('selected');
         }
-        div.textContent = `${String.fromCharCode(65 + optIndex)}. ${option}`;
-        div.addEventListener('click', () => selectOption(index, optIndex));
+        div.textContent = `${key}. ${question.options[key]}`;
+        div.addEventListener('click', () => selectOption(index, key));
         optionsContainer.appendChild(div);
     });
 
@@ -107,21 +101,21 @@ function displayQuestion(index) {
     updateButtons();
 }
 
-function selectOption(questionIndex, optionIndex) {
-    userAnswers[questionIndex] = optionIndex;
+function selectOption(questionIndex, optionKey) {
+    userAnswers[questionIndex] = optionKey;
     displayQuestion(questionIndex);
 }
 
 function navigateQuestion(direction) {
     const newIndex = currentQuestionIndex + direction;
-    if (newIndex >= 0 && newIndex < questions.length) {
+    if (newIndex >= 0 && newIndex < EXAM_QUESTIONS.length) {
         displayQuestion(newIndex);
     }
 }
 
 function updateButtons() {
     document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
-    document.getElementById('nextBtn').disabled = currentQuestionIndex === questions.length - 1;
+    document.getElementById('nextBtn').disabled = currentQuestionIndex === EXAM_QUESTIONS.length - 1;
 }
 
 // ==================== TIMER ====================
@@ -147,7 +141,6 @@ function startTimer() {
 async function submitExam() {
     if (examSubmitted) return;
     
-    // Check if all questions are answered
     const unanswered = userAnswers.filter(a => a === null).length;
     if (unanswered > 0) {
         if (!confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`)) {
@@ -160,17 +153,15 @@ async function submitExam() {
     examEndTime = new Date();
     const timeTaken = Math.floor((examEndTime - examStartTime) / 1000);
 
-    // Calculate score
     let correct = 0;
-    questions.forEach((q, index) => {
-        if (userAnswers[index] === q.answer) correct++;
+    EXAM_QUESTIONS.forEach((q, index) => {
+        if (userAnswers[index] === q.correct) correct++;
     });
 
-    const total = questions.length;
+    const total = EXAM_QUESTIONS.length;
     const percentage = ((correct / total) * 100).toFixed(2);
     const passFail = percentage >= 50 ? 'Pass' : 'Fail';
 
-    // Save to localStorage for result page
     const resultData = {
         studentName: currentUser.name,
         username: currentUser.username,
@@ -185,7 +176,6 @@ async function submitExam() {
 
     localStorage.setItem('examResult', JSON.stringify(resultData));
 
-    // Save to Firebase
     try {
         await saveExamResult(resultData);
         alert('✅ Result Saved Successfully!');
@@ -227,7 +217,7 @@ async function getAllResults() {
     }
 }
 
-// ==================== RESULT PAGE (result.html) ====================
+// ==================== RESULT PAGE ====================
 if (window.location.pathname.includes('result.html')) {
     const resultData = JSON.parse(localStorage.getItem('examResult'));
     if (!resultData) {
@@ -275,12 +265,10 @@ if (window.location.pathname.includes('result.html')) {
     });
 }
 
-// ==================== ADMIN DASHBOARD (dashboard.html) ====================
+// ==================== ADMIN DASHBOARD ====================
 if (window.location.pathname.includes('dashboard.html')) {
-    // Check admin login (simple check)
     const adminLoggedIn = localStorage.getItem('adminLoggedIn');
     if (!adminLoggedIn) {
-        // Simple admin login prompt
         const password = prompt('Enter admin password:');
         if (password === 'admin123') {
             localStorage.setItem('adminLoggedIn', 'true');
@@ -327,7 +315,7 @@ function displayResults(results) {
         <tr>
             <td>${result.studentName || 'N/A'}</td>
             <td>${result.username || 'N/A'}</td>
-            <td>${result.score || 0}/${result.totalQuestions || 84}</td>
+            <td>${result.score || 0}/${result.totalQuestions || 25}</td>
             <td>${result.percentage || 0}%</td>
             <td>
                 <span class="status-badge ${result.passFail === 'Pass' ? 'status-pass' : 'status-fail'}">
@@ -368,7 +356,7 @@ function sortResults() {
     displayResults(sorted);
 }
 
-// ==================== AUTO-REDIRECT FROM INDEX ====================
+// ==================== AUTO-REDIRECT ====================
 if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) {
     const userData = JSON.parse(localStorage.getItem('examUser'));
     const examStarted = localStorage.getItem('examStarted');
@@ -378,5 +366,4 @@ if (window.location.pathname === '/' || window.location.pathname.includes('index
     }
 }
 
-// Export functions for use in other files
 export { saveExamResult, getAllResults };
