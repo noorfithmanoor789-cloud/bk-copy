@@ -7,7 +7,7 @@ let currentUser = null;
 let currentQuestionIndex = 0;
 let userAnswers = new Array(EXAM_QUESTIONS.length).fill(null);
 let timer = null;
-let timeLeft = 1800; // 30 minutes
+let timeLeft = 1800;
 let examStartTime = null;
 let examEndTime = null;
 let examSubmitted = false;
@@ -54,7 +54,7 @@ if (startExamBtn) {
     });
 }
 
-// ==================== EXAM LOGIC (test.html) ====================
+// ==================== EXAM LOGIC ====================
 if (window.location.pathname.includes('test.html')) {
     const userData = JSON.parse(localStorage.getItem('examUser'));
     if (!userData) {
@@ -73,7 +73,6 @@ if (window.location.pathname.includes('test.html')) {
     document.getElementById('submitBtn')?.addEventListener('click', submitExam);
 }
 
-// ==================== QUESTION DISPLAY ====================
 function displayQuestion(index) {
     if (index < 0 || index >= EXAM_QUESTIONS.length) return;
 
@@ -118,7 +117,6 @@ function updateButtons() {
     document.getElementById('nextBtn').disabled = currentQuestionIndex === EXAM_QUESTIONS.length - 1;
 }
 
-// ==================== TIMER ====================
 function startTimer() {
     const timerDisplay = document.getElementById('timerDisplay');
     examStartTime = new Date();
@@ -137,7 +135,6 @@ function startTimer() {
     }, 1000);
 }
 
-// ==================== SUBMIT EXAM ====================
 async function submitExam() {
     if (examSubmitted) return;
     
@@ -187,7 +184,6 @@ async function submitExam() {
     }
 }
 
-// ==================== FIREBASE FUNCTIONS ====================
 async function saveExamResult(resultData) {
     try {
         const docRef = await addDoc(collection(db, 'exam-results'), {
@@ -217,7 +213,6 @@ async function getAllResults() {
     }
 }
 
-// ==================== RESULT PAGE ====================
 if (window.location.pathname.includes('result.html')) {
     const resultData = JSON.parse(localStorage.getItem('examResult'));
     if (!resultData) {
@@ -265,7 +260,6 @@ if (window.location.pathname.includes('result.html')) {
     });
 }
 
-// ==================== ADMIN DASHBOARD ====================
 if (window.location.pathname.includes('dashboard.html')) {
     const adminLoggedIn = localStorage.getItem('adminLoggedIn');
     if (!adminLoggedIn) {
@@ -356,7 +350,6 @@ function sortResults() {
     displayResults(sorted);
 }
 
-// ==================== AUTO-REDIRECT ====================
 if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) {
     const userData = JSON.parse(localStorage.getItem('examUser'));
     const examStarted = localStorage.getItem('examStarted');
